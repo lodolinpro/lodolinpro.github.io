@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lodolin的奇妙世界 · 三态天体最大细节版</title>
+<style>
+  :root {
+    --accent: #e8a87c;
+    --ink: #1a1c22;
+    --paper: #faf8f4;
+    --line: #d8d2c6;
+    --muted: #6b675e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+    line-height: 1.75;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 64px 48px 96px; }
+  header {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 32px;
+    margin-bottom: 48px;
+  }
+  .kicker {
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 40px; font-weight: 700; letter-spacing: 0.02em; }
+  .sub { color: var(--muted); font-size: 16px; margin-top: 12px; }
+  h2 {
+    font-size: 26px;
+    margin: 56px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+    line-height: 1.2;
+  }
+  h3 { font-size: 18px; margin: 28px 0 10px; font-family: "Noto Sans SC", sans-serif; }
+  p { margin-bottom: 14px; }
+  figure {
+    margin: 24px 0 8px;
+    border: 1px solid var(--line);
+    background: #04050a;
+  }
+  figure img { display: block; width: 100%; }
+  figcaption {
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 10px 14px;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 28px;
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #efe9df; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 1px 8px;
+    margin-right: 6px;
+  }
+  .meta {
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    margin-top: 56px;
+    padding-top: 18px;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 760px) {
+    .wrap { padding: 32px 20px 64px; }
+    h1 { font-size: 28px; }
+    .grid2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Lodolin World · Nebula Engine v2</div>
+  <h1>三态天体 · 最大细节版</h1>
+  <div class="sub">仙女座星系 M31 ⇄ 银河系 SBbc ⇄ 猎户座大星云 M42 —— 14000 粒子实时流转，每一态按真实天体结构建模</div>
+</header>
+
+<h2>三态渲染实拍</h2>
+<p>以下为引擎实际运行的无后期截图（SwiftShader 软件渲染，1440×900）。三态共用同一套 14000 粒子系统，流转时位置、颜色、尺寸三重渐变，约 2.8 秒完成形态切换。</p>
+
+<figure>
+  <img src="assets/x1-andromeda.png" alt="仙女座星系 M31">
+  <figcaption>仙女座 M31：双旋臂 + 核球色梯度 + HII 造星区（粉红）+ OB 星协（蓝亮）+ 尘埃带 + 球状星团</figcaption>
+</figure>
+
+<div class="grid2">
+  <figure>
+    <img src="assets/x4-milkyway.png" alt="银河系">
+    <figcaption>银河系 SBbc：盒状棒核 + 四旋臂 + HII 区 + OB 星协 + 球状星团晕</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/x3-orion.png" alt="猎户座大星云 M42">
+    <figcaption>猎户座 M42：电离弧气泡 + 纤维丝 + 蓝反射区 + 腰带三星 + 参宿四/七</figcaption>
+  </figure>
+</div>
+
+<h2>每一态还原了哪些真实结构</h2>
+
+<table>
+  <tr><th>形态</th><th>还原的真实天体结构</th><th>着色特征</th></tr>
+  <tr>
+    <td><strong>仙女座 M31</strong></td>
+    <td>双旋臂（对数螺线）、核球色梯度（暖核冷缘）、HII 造星区、OB 星协、臂内缘尘埃带、盘面翘曲、球状星团、伴星系 M32/M110</td>
+    <td>核球金暖 → 盘缘冷蓝，HII 粉红斑块沿臂分布</td>
+  </tr>
+  <tr>
+    <td><strong>银河系 SBbc</strong></td>
+    <td>四旋臂、盒状棒核（倾斜 25°）、核盘、HII 造星区、OB 星协、尘埃带、球状星团晕、晴星场</td>
+    <td>棒核金色花生形，四臂蓝白交织粉红 HII</td>
+  </tr>
+  <tr>
+    <td><strong>猎户座 M42</strong></td>
+    <td>主电离弧「吹散气泡」（心形亮边）、22 条放射纤维丝、四边形星团 Trapezium、内腔雾、M43 子泡、蓝反射区 NGC1977、暗尘带剪影、腰带三星、参宿四（红超巨星）/参宿七（蓝超巨星）、外围星场</td>
+    <td>气泡亮边粉白、尾端暗红，北侧膜瓣纯蓝反射</td>
+  </tr>
+</table>
+
+<h2>粒子引擎机制</h2>
+
+<table>
+  <tr><th>环节</th><th>实现</th></tr>
+  <tr><td>粒子规模</td><td>桌面 14000 / 移动端 9000 自适应，另有 420 背景尘埃常驻漂移</td></tr>
+  <tr><td>形变物理</td><td>弹簧力（k=9~16）+ 指数阻尼拖向目标形；叠加切向涡旋（swirl）与 Perlin 式噪声</td></tr>
+  <tr><td>三重渐变</td><td>流转 2.8s 内位置、颜色、粒子尺寸同步向目标形态插值</td></tr>
+  <tr><td>闪烁</td><td>每粒子独立相位，顶点着色器驱动 <code>0.72 + 0.28·sin(t·2.1 + φ)</code> 亮度脉动</td></tr>
+  <tr><td>交互</td><td>点击轮换三态、拖动环视、滚轮缩放、鼠标掠过局部斥力推开粒子</td></tr>
+  <tr><td>渲染</td><td>THREE.js r128 本地离线，加色混合 + 软圆点 sprite，无深度写入</td></tr>
+</table>
+
+<h2>如何运行</h2>
+<p>无需任何依赖，双击 <code>index.html</code> 即可。快速体验打开 <code>index.html#guest</code>；直达页面 <code>#guest/forum</code>、<code>#guest/gallery</code>。低端集显如遇卡顿，把 <code>js/morph.js</code> 顶部 <code>N</code> 从 14000 降到 8000。</p>
+
+<div class="meta">AutoClaw · 三态引擎文件：js/galaxy.js（M31/银河系）、js/nebula.js（M42）、js/morph.js（轮换/物理）、js/stage.js（交互舞台）</div>
+
+</div>
+</body>
+</html>

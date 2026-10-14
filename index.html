@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lodolin的奇妙世界</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23050505' stroke='%23ff3b3b' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 全屏噪点颗粒（沧野式胶片质感） -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- 液态玻璃背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ======================= 应用主体 ======================= -->
+<div id="app" class="app">
+  <!-- 悬浮玻璃胶囊导航 -->
+  <nav class="nav-capsule" aria-label="主导航">
+    <span class="nav-glider" aria-hidden="true"></span>
+    <span class="brand">
+      <span>Lodolin的奇妙世界</span>
+    </span>
+    <i class="nav-sep" aria-hidden="true"></i>
+    <div class="tabs" role="tablist" aria-label="页面导航">
+      <a href="#camera" data-nav="camera" class="tab is-active" role="tab" aria-selected="true">星河</a>
+      <a href="#gear" data-nav="gear" class="tab" role="tab" aria-selected="false">摄影设备</a>
+      <a href="#works" data-nav="works" class="tab" role="tab" aria-selected="false">作品集</a>
+    </div>
+  </nav>
+
+  <!-- ======================= 首页：双态星云轮换（银河系居首） ======================= -->
+  <section id="view-camera" class="view view-stage is-active" aria-label="星云星系">
+    <canvas id="stage" aria-label="银河系棒旋星系粒子，可拖动环视"></canvas>
+    <div class="stage-vignette" aria-hidden="true"></div>
+
+    <div class="stage-hud">
+      <div class="hero-title" aria-live="polite">
+        <h2 id="shape-name">银河系</h2>
+        <p class="hero-sub" id="shape-sub">MILKY WAY · 直径约 10 万光年 · SBbc 棒旋星系</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= 作品集（沧野式一屏一品） ======================= -->
+  <section id="view-works" class="view view-works" aria-label="作品集">
+    <div class="works-head">
+      <h2>作品集</h2>
+      <p>Lodolin 的硬核外拍墙 —— 江、山、城、海、穹顶。没有棚拍、没有闪光灯，全靠蹲点、等光和一双冻僵的手；《星辰大海》这句大话，先从山脚下和海边开始兑现。</p>
+    </div>
+
+    <div class="works-filter" role="tablist" aria-label="作品分类">
+      <span class="glider" aria-hidden="true"></span>
+      <button type="button" class="chip is-active" data-filter="all">全部</button>
+      <button type="button" class="chip" data-filter="天体">天体</button>
+      <button type="button" class="chip" data-filter="桂林 · 市区山水">桂林 · 市区山水</button>
+      <button type="button" class="chip" data-filter="桂林 · 临桂新区">桂林 · 临桂新区</button>
+      <button type="button" class="chip" data-filter="深圳">深圳</button>
+      <button type="button" class="chip" data-filter="北海">北海</button>
+      <button type="button" class="chip" data-filter="崇左 · 扶绥">崇左 · 扶绥</button>
+    </div>
+
+    <div class="works-feed">
+
+      <div class="works-cat" data-cat="天体"><h3>天体</h3><i></i></div>
+
+<section class="work" data-cat="天体">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="凸月月面特写：月海、环形山与第谷辐射纹在黑夜里清晰可见" src="assets/photos/12-moon-gibbous.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 01 · 月面特写</p>
+          <h3 class="work-title">月亮 · 九月末的凸月</h3>
+          <p class="work-desc">长焦怼月亮——月海的轮廓、环形山的边缘、第谷溅出来的辐射纹，全在。不用飞三十八万公里，等一个晴夜，把快门按下去就行。「yes, moonth.」</p>
+          <p class="work-meta">月面特写 · 凸月 · 2026.09.25 前后</p>
+          <button type="button" class="btn btn-primary" data-goto-shape="0">去星河里看看</button>
+        </div>
+      </section>
+
+<section class="work" data-cat="天体">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥姑龙水库银河拱桥全景：银心亮得发红，一条乡道直伸进星场" src="assets/photos/21-gulong-milkyway-arch.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 02 · 银河拱桥</p>
+          <h3 class="work-title">姑龙水库 · 银河拱桥</h3>
+          <p class="work-desc">扶绥县东门镇，姑龙水库。银河从两山之间整个拱过来，银心亮得发红，一条乡道直直伸进星场里。拍银河不用去高原，油门踩到位，黑就是最好的滤镜。</p>
+          <p class="work-meta">广西崇左 · 扶绥县东门镇姑龙水库 · 银河拱桥 · 2026.08.13</p>
+          <button type="button" class="btn btn-primary" data-goto-shape="0">去星河里看看</button>
+        </div>
+      </section>
+
+<section class="work" data-cat="天体">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥姑龙水库银河竖拍：银心立在水面上，山影与星光一同倒映湖中" src="assets/photos/22-gulong-milkyway-lake.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 03 · 银河倒影</p>
+          <h3 class="work-title">姑龙水库 · 银河倒影</h3>
+          <p class="work-desc">同一个水库，换竖构图等银心过顶——银河立在水面上，山是剪影，水把星光又存了一遍。凌晨的水库风停了，整片天都是你的。</p>
+          <p class="work-meta">广西崇左 · 扶绥县东门镇姑龙水库 · 银河与山影倒映 · 2026.08.11</p>
+        </div>
+      </section>
+
+      <div class="works-cat" data-cat="桂林 · 市区山水"><h3>桂林 · 市区山水</h3><i></i></div>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林叠彩山俯瞰木龙湖蓝调夜景：亮灯的木龙塔、黑瓦古建群与背后的喀斯特峰林" src="assets/photos/02-guilin-diecai-mulonghu-bluehour.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 04 · 桂林夜景</p>
+          <h3 class="work-title">叠彩山 · 木龙湖蓝调</h3>
+          <p class="work-desc">桂林叠彩山半山腰，正对木龙湖。山上的灯和湖边的木龙塔一起亮起来，黑瓦古建群被暖光描了边，背后的喀斯特一层层退成蓝。桂林夜景的天花板不在江上，在这一眼里 —— 门票二十五块，别嫌贵，民谚说「登上叠彩山，活到一百三」。</p>
+          <p class="work-meta">广西桂林 · 叠彩山 · 俯瞰木龙湖与木龙塔 · 蓝调时刻</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林叠彩山木龙湖黄金时刻：夕阳把峰林与古建染成蜂蜜色" src="assets/photos/03-guilin-diecai-mulonghu-goldenhour.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 05 · 日落金山</p>
+          <h3 class="work-title">叠彩山 · 木龙湖黄金时刻</h3>
+          <p class="work-desc">同一个机位，换一个季节、换一个钟点，夕阳把整片峰林和古建染成蜂蜜色。蓝调是桂林的底妆，金色才是它白昼里的最后一口气 —— 一个机位，两种桂林。</p>
+          <p class="work-meta">广西桂林 · 叠彩山 · 木龙湖与峰林 · 日落金光</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林虞山公园欧洲园：老榕树枝干横过石板路，身后是爬满藤蔓的罗马柱石廊与喷泉" src="assets/photos/08-guilin-yushan-park-arches.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 06 · 欧式园林</p>
+          <h3 class="work-title">虞山公园 · 欧洲园石廊</h3>
+          <p class="work-desc">桂林城北的虞山公园，北园是欧式园林。老榕树的枝干横过石板路，搭成一道天然拱门；后面一排对称的罗马柱石廊爬满藤蔓，喷泉在正中开着。法式花园长在喀斯特城里，一点都不违和。</p>
+          <p class="work-meta">广西桂林 · 叠彩区 · 虞山公园北园 · 正午</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林虞山公园欧洲园中轴叠水：水沿台阶层层跌落，两侧棕榈与模纹花坛对称排开" src="assets/photos/09-guilin-yushan-park-cascade.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 07 · 欧式园林</p>
+          <h3 class="work-title">虞山公园 · 叠水台阶</h3>
+          <p class="work-desc">北园中轴线上一整条叠水，水从顶层一路跌进池子，两道台阶对称着往下走，棕榈和模纹花坛把绿修得整整齐齐。欧洲园的浪漫，是拿几何一点一点做出来的。</p>
+          <p class="work-meta">广西桂林 · 叠彩区 · 虞山公园北园 · 中轴叠水</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林虞山公园欧洲园：石柱拱廊爬满牵牛花藤，喷泉水雾在阳光下飘散" src="assets/photos/10-guilin-yushan-park-colonnade.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 08 · 欧式园林</p>
+          <h3 class="work-title">虞山公园 · 藤蔓石廊</h3>
+          <p class="work-desc">一整排石柱拱廊全交给藤蔓管，牵牛顺着柱子一路爬到顶，喷泉的水雾飘过来，太阳一照全是反光。石头负责结构，植物负责表情。</p>
+          <p class="work-meta">广西桂林 · 叠彩区 · 虞山公园北园 · 喷泉池畔</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林穿山景区俯瞰：明代寿佛塔立在塔山之顶，江湖绕城，喀斯特峰林与城市天际线同框" src="assets/photos/11-guilin-tashan-pagoda.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 09 · 桂林山水</p>
+          <h3 class="work-title">穿山 · 塔山与寿佛塔</h3>
+          <p class="work-desc">桂林老八景「塔山清影」——明代寿佛塔立在塔山之顶，十三米高的七层砖塔挤在六十一平方米的山尖上，吉尼斯认证的「世界最小山顶古塔」。从穿山一带望过去，江湖绕城，峰林一直排到天边，古塔和楼宇同框。</p>
+          <p class="work-meta">广西桂林 · 七星区穿山景区 · 塔山寿佛塔 · 白天俯瞰</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="桂林榕湖：红柱亭与红灯笼倒映在湖面，傍晚的光从树叶间漏下来" src="assets/photos/14-guilin-ronghu-pavilion.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 10 · 桂林水色</p>
+          <h3 class="work-title">榕湖 · 亭影</h3>
+          <p class="work-desc">榕湖边的亭子，红柱、青瓦、红灯笼，倒在水里被风揉碎。傍晚的光从树叶缝里漏下来，湖面平得像另一块天。</p>
+          <p class="work-meta">广西桂林 · 榕湖 · 傍晚</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林榕湖水晶玻璃桥：整座桥的栏杆与亭子为玻璃构造，阳光下通体透亮，倒影入水" src="assets/photos/15-guilin-ronghu-glass-bridge.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 11 · 桂林水色</p>
+          <h3 class="work-title">榕湖 · 玻璃桥</h3>
+          <p class="work-desc">榕湖上的水晶玻璃桥，栏杆和桥亭全是玻璃的，太阳一照通体透亮，倒影在水里晃。国内第一座水晶玻璃桥，白天看着像件搁在水面上的玻璃乐器。</p>
+          <p class="work-meta">广西桂林 · 榕湖 · 水晶玻璃桥 · 午后</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林榕杉湖夜色：提灯乌篷船停在湖面，暖光落进水里" src="assets/photos/16-guilin-rongshahu-night-boat.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 12 · 桂林夜色</p>
+          <h3 class="work-title">榕杉湖 · 夜航</h3>
+          <p class="work-desc">两江四湖的夜游船收了帆停在湖面，一盏提灯挂在船头，暖光落在水里。岸上的城市还在响，湖面已经安静了。</p>
+          <p class="work-meta">广西桂林 · 榕杉湖 · 两江四湖 · 入夜</p>
+        </div>
+      </section>
+
+      <div class="works-cat" data-cat="桂林 · 临桂新区"><h3>桂林 · 临桂新区</h3><i></i></div>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="桂林杉湖日月双塔夜景：金色日塔与银白月塔倒映湖中" src="assets/photos/17-guilin-shanhu-sun-moon-pagodas.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 13 · 桂林夜色</p>
+          <h3 class="work-title">杉湖 · 日月双塔</h3>
+          <p class="work-desc">杉湖里的日月双塔——日塔铜造九层，月塔琉璃七层，水下还有十八米把它们连在一起。金的一座银的一座，晚上像浮在湖面的两团火。</p>
+          <p class="work-meta">广西桂林 · 杉湖 · 日月双塔 · 夜</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 市区山水">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="桂林联发乾景广场：弧形混凝土雨棚下的中央空中花园玻璃塔与台阶" src="assets/photos/04-guilin-lianfa-qianjing-plaza.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 14 · 建筑几何</p>
+          <h3 class="work-title">乾景广场 · 空中花园</h3>
+          <p class="work-desc">桂林叠彩区站前路，离高铁北站八百米。从底层雨棚底下抬头，一整圈弧形清水混凝土把蓝天切成一个开口，中间的玻璃体种满绿植，台阶上贴着黄条。街 Mall 的中央空中花园 + 立体跃层电梯，每层连廊牵着手 —— 不用滤镜，混凝土自己会画图。</p>
+          <p class="work-meta">广西桂林 · 叠彩区站前路29号 · 联发乾景广场 · 正午蓝天</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林 · 临桂新区">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林临桂新区夜景：一院两馆仿古建筑群与双子塔同框，背后是喀斯特峰林" src="assets/photos/05-guilin-lingui-cbd-night.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 15 · 城市天际线</p>
+          <h3 class="work-title">临桂 · 双子塔夜色</h3>
+          <p class="work-desc">桂林往西，临桂新区撑起另一片天。金色古韵的「一院两馆」隔着湖水与摩登双子塔对望，状元桥、大观楼、风雨桥亮成一条暖线，背后还是那片熟悉的喀斯特 —— 老桂林的山水没退场，新城在它上面又长了一层。</p>
+          <p class="work-meta">广西桂林 · 临桂新区 · 一院两馆与双子塔同框 · 亮灯后</p>
+        </div>
+      </section>
+
+      <div class="works-cat" data-cat="深圳"><h3>深圳</h3><i></i></div>
+
+<section class="work" data-cat="桂林 · 临桂新区">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="桂林临桂山水公园夜景：状元桥上的唐风楼阁鎏金亮灯，桥孔染成蓝色，远处双子塔仍在亮灯" src="assets/photos/13-guilin-shanshui-park-zhuangyuanlou.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 16 · 桂林夜色</p>
+          <h3 class="work-title">山水公园 · 状元楼</h3>
+          <p class="work-desc">临桂山水公园，九十九米九孔的状元桥横在水上，桥头的状元楼按唐风起翘，灯一亮整座桥像鎏金的；桥孔被染成蓝色，一弯一弯排过去。远处新区的双子塔还亮着——仿古和新城，隔水对望。</p>
+          <p class="work-meta">广西桂林 · 临桂区山水公园 · 状元桥与状元楼 · 亮灯后</p>
+        </div>
+      </section>
+
+      <div class="works-cat" data-cat="北海"><h3>北海</h3><i></i></div>
+
+<section class="work" data-cat="桂林 · 临桂新区">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="临桂双子塔仰视：塔冠灯带亮成金红色，路口路牌与行人入镜" src="assets/photos/18-guilin-lingui-twin-towers-night.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 17 · 城市夜色</p>
+          <h3 class="work-title">临桂 · 双子塔下</h3>
+          <p class="work-desc">新区的双子塔从路口仰上去，塔冠的灯一层层亮成金红，路牌上写着电梯厅和购物中心。站到塔底下看，楼是真的在往上长。</p>
+          <p class="work-meta">广西桂林 · 临桂新区 · 双子塔 · 夜</p>
+        </div>
+      </section>
+
+      <div class="works-cat" data-cat="崇左 · 扶绥"><h3>崇左 · 扶绥</h3><i></i></div>
+
+<section class="work" data-cat="深圳">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="深圳岗厦北枢纽「深圳之眼」：米字件网状穹顶与中央天眼，下方是全透明玻璃隧道" src="assets/photos/06-shenzhen-gangxia-bei-eye.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 18 · 室内建筑</p>
+          <h3 class="work-title">深圳岗厦北 · 深圳之眼</h3>
+          <p class="work-desc">地下五线换乘的中庭。抬头，一万两千多个「米字件」按费马螺线织成一张网，正中间一颗直径九米的「天眼」把阳光直直砸到地下；脚下一段全透明玻璃隧道，列车在里面穿行。四十八乘五十一点二米的无柱大跨，一根柱子都不用来撑场面 —— 被叫「深圳之眼」不是没道理。</p>
+          <p class="work-meta">广东深圳 · 福田区岗厦北枢纽 · 中庭「深圳之眼」 · 室内建筑</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="北海">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="广西北海海神广场前沙滩退潮：两人站在混凝土块旁，面前是宽阔的滩涂与海浪" src="assets/photos/07-beihai-haishen-square-lowtide.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 19 · 海与人</p>
+          <h3 class="work-title">北海 · 海神广场退潮</h3>
+          <p class="work-desc">北海银海区海景大道，海神广场前。波塞冬手持三叉戟面朝大海，我们在退潮的滩涂上站着 —— 浪推上来一层白，再退回去，沙面亮得像刚洗过。旁边就是大墩海，潮水带又长又平，弯腰能耙到贝类和小蟹；治「城市病」的成本，一张动车票。</p>
+          <p class="work-meta">广西北海 · 银海区海景大道 · 海神广场前沙滩 · 退潮时分</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="广西崇左扶绥：左江上空的火烧云，江面被染成金色光带，远处喀斯特峰林与糖厂烟囱同框" src="assets/photos/01-fusui-zuojiang-sunset.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 20 · 江河晚霞</p>
+          <h3 class="work-title">扶绥 · 左江火烧云</h3>
+          <p class="work-desc">广西崇左扶绥，文化广场边上就是左江。太阳往峰林里一沉，整条江被烧成一条金带，喀斯特一列列排到天边，糖厂的烟囱杵在中间不躲不闪 —— 小城的工业与山水，在霞光里各占一半。徐霞客写过「北有漓江，南有左江」，今天算是对上了。</p>
+          <p class="work-meta">广西崇左 · 扶绥县文化广场 · 左江畔 · 日落霞光</p>
+        </div>
+      </section>
+
+      <section class="work" data-cat="崇左 · 扶绥">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥县城俯瞰：湖心小岛被学校与民房环绕，傍晚光线温暖" src="assets/photos/19-fusui-county-town-lake.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 21 · 小城</p>
+          <h3 class="work-title">扶绥 · 县城与湖</h3>
+          <p class="work-desc">扶绥县城的高处看下去，湖心留着一个小岛，学校和民房一层层围着水排开。小城不大，绿得奢侈。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 傍晚俯瞰</p>
+        </div>
+      </section>
+
+      <section class="work" data-cat="崇左 · 扶绥">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥县城路口夜景：长曝光把车灯拉成红黄光轨，农商行招牌亮灯" src="assets/photos/20-fusui-county-night-traffic.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 22 · 小城</p>
+          <h3 class="work-title">扶绥 · 县城路口</h3>
+          <p class="work-desc">县城的十字路口，长曝光把车灯拉成红黄两股，农商行的招牌亮着。小城的夜不吵，但一直亮着。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 夜 · 长曝光</p>
+        </div>
+      </section>
+
+      <section class="work" data-cat="崇左 · 扶绥">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥县城老街夜色：山海冰室木招牌亮灯，藤椅摆满人行道" src="assets/photos/23-fusui-night-street.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 23 · 小城</p>
+          <h3 class="work-title">扶绥 · 老街夜色</h3>
+          <p class="work-desc">县城的老街入夜才醒——「山海冰室」的木招牌亮着，一排排藤椅摆到人行道上，橙光把半条街染成暖色。冰室、糖水、夜风，小城的夜从这里开始。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 山海冰室老街 · 夜</p>
+        </div>
+      </section>
+
+      <section class="work" data-cat="崇左 · 扶绥">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥文化广场左江灯塔日落：白塔立于圆形广场，晚霞把整条江染成橘色" src="assets/photos/24-fusui-lighthouse-sunset.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 24 · 江河晚霞</p>
+          <h3 class="work-title">扶绥 · 左江灯塔</h3>
+          <p class="work-desc">文化广场旁的左江灯塔，塔身画着恐龙——扶绥可是「恐龙之乡」。晚霞烧到最旺的时候，整条江和广场全泡在橘色里，塔是画面里唯一的白。</p>
+          <p class="work-meta">广西崇左 · 扶绥县文化广场 · 左江灯塔 · 日落霞光</p>
+        </div>
+      </section>
+
+
+
+    </div>
+  </section>
+
+  <!-- ======================= 摄影设备 ======================= -->
+  <section id="view-gear" class="view view-gear" aria-label="摄影设备">
+    <div class="works-head">
+      <h2>Lodolin的摄影设备</h2>
+      <p>一套为「什么都想拍」配的轻量组合 —— 机身负责快和稳，镜头负责全焦段 F2.8 恒定；从扫街到银河，全靠它。</p>
+    </div>
+
+    <div class="gear-stage">
+      <figure>
+        <img src="assets/gear/lodolin-rig.jpg" alt="Lodolin 的日常挂机形态：索尼 ZV-E10 加腾龙 17-70mm F/2.8，装 SmallRig 兔笼与花瓣遮光罩">
+      </figure>
+      <p class="gear-note">日常挂机形态 · SONY ZV-E10 ＋ TAMRON 17-70mm F/2.8 Di III-A VC RXD ＋ SmallRig 兔笼 · 花瓣遮光罩</p>
+    </div>
+
+    <div class="gear-cards">
+      <div class="gear-card">
+        <p class="gear-tag">机身 · BODY</p>
+        <h3>SONY ZV-E10 一代</h3>
+        <p class="gear-desc">一台为内容创作而生的 Vlog 微单：2420 万像素 APS-C 大底，侧翻屏加三胶囊麦克风，机身只重 343 克——快和稳，它都管。</p>
+        <ul class="gear-spec">
+          <li><b>传感器</b>APS-C Exmor CMOS · 约 2420 万有效像素</li>
+          <li><b>对焦</b>快速混合 AF · 425 相位 + 425 对比 · 实时眼部对焦 / 实时追踪</li>
+          <li><b>视频</b>4K 30p（2.4 倍超采样）· FHD 120p · S-log2/3 · HLG</li>
+          <li><b>连拍</b>约 11 张/秒（机械快门）</li>
+          <li><b>感光度</b>ISO 100-32000（可扩展至 51200）</li>
+          <li><b>屏幕</b>3.0″ 侧翻触摸屏（约 92 万点）</li>
+          <li><b>特色</b>背景虚化一键切换 · 优先对焦展示物 · 三级美肤</li>
+          <li><b>收音</b>内置三胶囊指向性麦克风 · 附赠防风罩</li>
+          <li><b>直播</b>USB 直连流媒体 · USB-C 外接供电</li>
+          <li><b>续航</b>约 440 张照片 / 约 125 分钟视频</li>
+          <li><b>重量</b>约 343g（含电池与存储卡）· 115.2 × 64.2 × 44.8mm</li>
+        </ul>
+      </div>
+
+      <div class="gear-card">
+        <p class="gear-tag">镜头 · LENS</p>
+        <h3>TAMRON 17-70mm F/2.8 Di III-A VC RXD</h3>
+        <p class="gear-desc">世界首支 17mm 起步的 APS-C 大光圈标准变焦（型号 B070）——一镜走天下：广角扫街、长焦特写、贴脸近摄，全程 F2.8 恒定。</p>
+        <ul class="gear-spec">
+          <li><b>焦距</b>17-70mm（35mm 等效 25.5-105mm）· 4.1 倍变焦</li>
+          <li><b>光圈</b>全焦段恒定 F2.8 · 9 片圆形光圈 · 最小 F22</li>
+          <li><b>光学</b>12 组 16 片 · 2×LD + 2×GM + 1×复合非球面 · BBAR 镀膜</li>
+          <li><b>防抖</b>VC 光学防抖（针对视频优化控制）</li>
+          <li><b>对焦</b>RXD 高速静音步进马达 · 有效抑制对焦呼吸</li>
+          <li><b>近摄</b>最近 0.19m（广角）/ 0.39m（长焦）· 最大倍率 1:4.8</li>
+          <li><b>口径</b>φ67mm（与腾龙无反镜头统一）</li>
+          <li><b>防护</b>防滴溅密封 · 前组氟素抗污涂层</li>
+          <li><b>体积</b>φ74.6mm × 119.3mm · 525g（E 卡口）</li>
+          <li><b>卡口</b>索尼 E 卡口</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="gear-cta">
+      <button type="button" class="btn btn-primary" data-nav="works">看看用它们拍的照片</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>© 2026 Lodolin 的奇妙世界</span>
+    <i class="foot-sep" aria-hidden="true"></i>
+    <span>整活向 &amp; 非官方站</span>
+  </footer>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/galaxy.js"></script>
+<script src="js/earth.js"></script>
+<script src="js/morph.js"></script>
+<script src="js/stage.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
