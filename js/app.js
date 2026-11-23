@@ -1,11 +1,18 @@
 /* =========================================================
-   app.js — 星河舞台装配 + 作品集路由
-   双视图：星河（银河系单形态）/ 作品集（沧野式一屏一品）
+   app.js — 作品集 / 摄影设备 双视图路由
+   3D 星河场景已移出（独立项目 lodolin-3d）
    ========================================================= */
 (function () {
   'use strict';
 
   var $ = function (id) { return document.getElementById(id); };
+
+  /* 回到顶部按钮显隐同步（由 initToTop 赋值） */
+  var syncToTop = function () {};
+
+  /* 分类二级（景点/题材）筛选状态（由 initFilter / initSpotMenus 维护） */
+  var activeSpot = '';
+  var applyFilter = function () {};
 
   /* JS 就绪标记（作品入场动画依赖） */
   document.documentElement.classList.add('js');
@@ -43,10 +50,10 @@
 
   /* ---------------- 双视图路由 ---------------- */
 
-  var VIEWS = ['camera', 'gear', 'works'];
+  var VIEWS = ['about', 'works', 'gear'];
 
   function go(name) {
-    if (VIEWS.indexOf(name) < 0) name = 'camera';
+    if (VIEWS.indexOf(name) < 0) name = 'about';
     var tabs = document.querySelectorAll('[data-nav]');
     Array.prototype.forEach.call(tabs, function (t) {
       var on = t.getAttribute('data-nav') === name;
@@ -66,6 +73,8 @@
         window.dispatchEvent(new Event('resize'));
       });
     }
+    /* 切换视图后同步回到顶部按钮 */
+    requestAnimationFrame(syncToTop);
   }
 
   function initRouter() {
@@ -76,8 +85,9 @@
         go(t.getAttribute('data-nav'));
       });
     });
-    /* 深链：#works / #gear 直达 */
+    /* 深链：#works / #about / #gear 直达 */
     if (location.hash.indexOf('works') >= 0) go('works');
+    else if (location.hash.indexOf('about') >= 0) go('about');
     else if (location.hash.indexOf('gear') >= 0) go('gear');
   }
 
@@ -98,49 +108,6 @@
       Array.prototype.forEach.call(works, function (w) { io.observe(w); });
     } else {
       Array.prototype.forEach.call(works, function (w) { w.classList.add('is-in'); });
-    }
-
-    /* 「去星河里看看」：切到星河页并飞回银河视角 */
-    var btns = document.querySelectorAll('[data-goto-shape]');
-    Array.prototype.forEach.call(btns, function (btn) {
-      btn.addEventListener('click', function () {
-        var i = Number(btn.getAttribute('data-goto-shape'));
-        try {
-          if (window.Lodolin3D && window.Lodolin3D.goShape) window.Lodolin3D.goShape(i);
-        } catch (e) { console.error(e); }
-        go('camera');
-      });
-    });
-  }
-
-  /* ---------------- 3D 舞台 ---------------- */
-
-  function initStage() {
-    try {
-      window.Lodolin3D.initStage($('stage'));
-      window.Lodolin3D.onStateChange(function (info) {
-        var name = $('shape-name');
-        var sub = $('shape-sub');
-        var hero = document.querySelector('.hero-title');
-        var names = { milkyway: '银河系', earth: '地球' };
-        var subs = {
-          milkyway: 'MILKY WAY · 直径约 10 万光年 · SBbc 棒旋星系',
-          earth: 'EARTH · 第三行星 · 直径约 1.27 万公里'
-        };
-        if (info && info.shape) {
-          if (name) name.textContent = names[info.shape] || info.shape;
-          if (sub) sub.textContent = subs[info.shape] || '';
-          /* 形态确定时重放大标题浮起动画（沧野式入场） */
-          if (hero && !info.morphing) {
-            hero.classList.remove('is-rising');
-            void hero.offsetWidth;
-            hero.classList.add('is-rising');
-          }
-        }
-      });
-    } catch (e) {
-      console.error(e);
-      toast('3D 加载失败：' + e.message);
     }
   }
 
@@ -166,19 +133,26 @@
       var works = document.querySelectorAll('.work');
       var cats = document.querySelectorAll('.works-cat');
       Array.prototype.forEach.call(works, function (w) {
-        var match = f === 'all' || w.getAttribute('data-cat') === f;
+        var okCat = f === 'all' || w.getAttribute('data-cat') === f;
+        var okSpot = !activeSpot || w.getAttribute('data-spot') === activeSpot;
+        var match = okCat && okSpot;
         w.style.display = match ? '' : 'none';
         if (match && !w.classList.contains('is-in')) w.classList.add('is-in');
       });
       Array.prototype.forEach.call(cats, function (c) {
-        var match = f === 'all' || c.getAttribute('data-cat') === f;
+        /* 景点筛选时隐藏分类标题，只留作品流 */
+        var match = (f === 'all' || c.getAttribute('data-cat') === f) && !activeSpot;
         c.style.display = match ? '' : 'none';
       });
       moveGlider();
     }
 
+    applyFilter = apply;
+
     Array.prototype.forEach.call(chips, function (ch) {
       ch.addEventListener('click', function () {
+        activeSpot = '';
+        Array.prototype.forEach.call(document.querySelectorAll('.spot-menu'), function (m) { m.hidden = true; });
         apply(ch.getAttribute('data-filter'));
       });
     });
@@ -189,6 +163,117 @@
     requestAnimationFrame(moveGlider);
   }
 
+  /* ---------------- 分类二级菜单（悬停 / 点击展开） ---------------- */
+
+  function initSpotMenus() {
+    var bar = document.querySelector('.works-filter');
+    if (!bar) return;
+    var triggers = bar.querySelectorAll('.chip[data-spot-menu]');
+    if (!triggers.length) return;
+
+    var closers = [];
+
+    function closeAll() {
+      closers.forEach(function (fn) { fn(); });
+    }
+
+    function bind(trig) {
+      var menu = document.getElementById(trig.getAttribute('data-spot-menu'));
+      if (!menu) return;
+      var timer = null;
+      var cat = trig.getAttribute('data-filter');
+
+      function sync() {
+        Array.prototype.forEach.call(menu.querySelectorAll('.spot-chip'), function (x) {
+          x.classList.toggle('is-active', (x.getAttribute('data-spot') || '') === activeSpot);
+        });
+      }
+
+      function place() {
+        var r = trig.getBoundingClientRect();
+        var w = Math.min(360, window.innerWidth - 24);
+        var left = Math.max(12, Math.min(r.left, window.innerWidth - w - 12));
+        menu.style.width = w + 'px';
+        menu.style.left = left + 'px';
+        menu.style.top = (r.bottom + 10) + 'px';
+        menu.hidden = false;
+        sync();
+      }
+
+      function hideNow() {
+        clearTimeout(timer);
+        menu.hidden = true;
+      }
+
+      function show() {
+        clearTimeout(timer);
+        closeAll();
+        place();
+      }
+
+      function hideSoon() {
+        clearTimeout(timer);
+        timer = setTimeout(hideNow, 200);
+      }
+
+      trig.addEventListener('mouseenter', show);
+      trig.addEventListener('mouseleave', hideSoon);
+      trig.addEventListener('click', show);
+
+      menu.addEventListener('mouseenter', function () { clearTimeout(timer); });
+      menu.addEventListener('mouseleave', hideSoon);
+
+      menu.addEventListener('click', function (e) {
+        var btn = e.target;
+        while (btn && btn !== menu && !btn.classList.contains('spot-chip')) btn = btn.parentNode;
+        if (!btn || btn === menu) return;
+        activeSpot = btn.getAttribute('data-spot') || '';
+        applyFilter(cat);
+        hideNow();
+      });
+
+      closers.push(hideNow);
+    }
+
+    Array.prototype.forEach.call(triggers, bind);
+
+    window.addEventListener('resize', closeAll);
+    window.addEventListener('scroll', closeAll, true);
+  }
+
+  /* ---------------- 回到顶部（固定右下角） ---------------- */
+
+  function initToTop() {
+    var btn = $('to-top');
+    if (!btn) return;
+
+    function activeView() {
+      return document.querySelector('.view.is-active');
+    }
+
+    function update() {
+      var el = activeView();
+      var top = el ? el.scrollTop : 0;
+      btn.classList.toggle('is-on', top > 240);
+    }
+
+    syncToTop = update;
+
+    Array.prototype.forEach.call(document.querySelectorAll('.view'), function (v) {
+      v.addEventListener('scroll', update, { passive: true });
+    });
+
+    btn.addEventListener('click', function () {
+      var el = activeView();
+      if (!el) return;
+      if (el.scrollTo) el.scrollTo({ top: 0, behavior: 'smooth' });
+      else el.scrollTop = 0;
+    });
+
+    window.addEventListener('resize', update);
+    update();
+  }
+
   /* ---------------- 启动 ---------------- */
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -196,6 +281,7 @@
     initNavGlider();
     initWorks();
     initFilter();
-    initStage();
+    initSpotMenus();
+    initToTop();
   });
 })();

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Lodolin的奇妙世界</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23050505' stroke='%23ff3b3b' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="css/style.css">
+<title>Lodolin</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='8'%20fill='%23000000'/%3E%3Ctext%20x='32'%20y='37'%20font-family='%22Segoe%20Script%22,%22Brush%20Script%20MT%22,%22Snell%20Roundhand%22,cursive'%20font-size='12'%20font-weight='bold'%20fill='%23ffffff'%20text-anchor='middle'%3ELodolin%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css?v=20261123o">
 </head>
 <body>
 
@@ -20,26 +20,30 @@
   <!-- 悬浮玻璃胶囊导航 -->
   <nav class="nav-capsule" aria-label="主导航">
     <span class="nav-glider" aria-hidden="true"></span>
-    <span class="brand">
-      <span>Lodolin的奇妙世界</span>
-    </span>
+    <a class="brand" href="#about" data-nav="about" aria-label="Lodolin，回到首页">
+      <img class="brand-avatar" src="assets/avatar-shark.jpg" alt="" width="20" height="20">
+      <span>Lodolin</span>
+    </a>
     <i class="nav-sep" aria-hidden="true"></i>
     <div class="tabs" role="tablist" aria-label="页面导航">
-      <a href="#camera" data-nav="camera" class="tab is-active" role="tab" aria-selected="true">星河</a>
+      <a href="#about" data-nav="about" class="tab is-active" role="tab" aria-selected="true">longing</a>
       <a href="#gear" data-nav="gear" class="tab" role="tab" aria-selected="false">摄影设备</a>
       <a href="#works" data-nav="works" class="tab" role="tab" aria-selected="false">作品集</a>
     </div>
   </nav>
 
-  <!-- ======================= 首页：双态星云轮换（银河系居首） ======================= -->
-  <section id="view-camera" class="view view-stage is-active" aria-label="星云星系">
-    <canvas id="stage" aria-label="银河系棒旋星系粒子，可拖动环视"></canvas>
-    <div class="stage-vignette" aria-hidden="true"></div>
-
-    <div class="stage-hud">
-      <div class="hero-title" aria-live="polite">
-        <h2 id="shape-name">银河系</h2>
-        <p class="hero-sub" id="shape-sub">MILKY WAY · 直径约 10 万光年 · SBbc 棒旋星系</p>
+  <!-- ======================= 介绍 ======================= -->
+  <section id="view-about" class="view view-about is-active" aria-label="介绍">
+    <div class="about-wrap">
+      <p class="about-kicker">ABOUT · LODOLIN</p>
+      <div class="about-head">
+        <img class="about-avatar" src="assets/avatar-shark.jpg" alt="longing 的头像" width="84" height="84">
+        <h2 class="about-title">longing</h2>
+      </div>
+      <p class="about-lead">正在学习摄影中</p>
+      <div class="about-actions">
+        <a class="btn btn-primary" href="https://v.douyin.com/PHcsxChGbZk/" target="_blank" rel="noopener noreferrer">去抖音看看 ↗</a>
+        <a class="btn" href="#works" data-nav="works">看作品集</a>
       </div>
     </div>
   </section>
@@ -54,19 +58,65 @@
     <div class="works-filter" role="tablist" aria-label="作品分类">
       <span class="glider" aria-hidden="true"></span>
       <button type="button" class="chip is-active" data-filter="all">全部</button>
-      <button type="button" class="chip" data-filter="天体">天体</button>
-      <button type="button" class="chip" data-filter="桂林 · 市区山水">桂林 · 市区山水</button>
-      <button type="button" class="chip" data-filter="桂林 · 临桂新区">桂林 · 临桂新区</button>
-      <button type="button" class="chip" data-filter="深圳">深圳</button>
-      <button type="button" class="chip" data-filter="北海">北海</button>
-      <button type="button" class="chip" data-filter="崇左 · 扶绥">崇左 · 扶绥</button>
+      <button type="button" class="chip" data-filter="天体" data-spot-menu="menu-tian">天体</button>
+      <button type="button" class="chip" data-filter="桂林" data-spot-menu="menu-guilin">桂林</button>
+      <button type="button" class="chip" data-filter="南宁" data-spot-menu="menu-nanning">南宁</button>
+      <button type="button" class="chip" data-filter="深圳" data-spot-menu="menu-shenzhen">深圳</button>
+      <button type="button" class="chip" data-filter="北海" data-spot-menu="menu-beihai">北海</button>
+      <button type="button" class="chip" data-filter="崇左 · 扶绥" data-spot-menu="menu-chongzuo">崇左 · 扶绥</button>
+    </div>
+
+    <div class="spot-menu" id="menu-guilin" role="menu" aria-label="桂林景点筛选" hidden>
+      <button type="button" class="spot-chip" data-spot="">全部桂林<i>36</i></button>
+      <button type="button" class="spot-chip" data-spot="叠彩山">叠彩山 · 木龙湖<i>3</i></button>
+      <button type="button" class="spot-chip" data-spot="乾景广场">乾景广场<i>5</i></button>
+      <button type="button" class="spot-chip" data-spot="临桂">临桂新区<i>2</i></button>
+      <button type="button" class="spot-chip" data-spot="虞山公园">虞山公园<i>5</i></button>
+      <button type="button" class="spot-chip" data-spot="穿山">穿山<i>2</i></button>
+      <button type="button" class="spot-chip" data-spot="山水公园">山水公园<i>2</i></button>
+      <button type="button" class="spot-chip" data-spot="榕湖">榕湖 · 榕杉湖<i>6</i></button>
+      <button type="button" class="spot-chip" data-spot="日月双塔">日月双塔<i>2</i></button>
+      <button type="button" class="spot-chip" data-spot="两江四湖">两江四湖 · 滨江路<i>3</i></button>
+      <button type="button" class="spot-chip" data-spot="逍遥楼">逍遥楼<i>2</i></button>
+      <button type="button" class="spot-chip" data-spot="象鼻山">象鼻山<i>2</i></button>
+      <button type="button" class="spot-chip" data-spot="漓江">漓江<i>1</i></button>
+      <button type="button" class="spot-chip" data-spot="美食">桂林米粉<i>1</i></button>
+    </div>
+
+    <div class="spot-menu" id="menu-tian" role="menu" aria-label="天体题材筛选" hidden>
+      <button type="button" class="spot-chip" data-spot="">全部天体<i>3</i></button>
+      <button type="button" class="spot-chip" data-spot="月面">月面<i>1</i></button>
+      <button type="button" class="spot-chip" data-spot="银河">银河<i>2</i></button>
+    </div>
+
+    <div class="spot-menu" id="menu-nanning" role="menu" aria-label="南宁区域筛选" hidden>
+      <button type="button" class="spot-chip" data-spot="">全部南宁<i>6</i></button>
+      <button type="button" class="spot-chip" data-spot="内街">内街<i>4</i></button>
+      <button type="button" class="spot-chip" data-spot="南湖">南湖<i>2</i></button>
+    </div>
+
+    <div class="spot-menu" id="menu-shenzhen" role="menu" aria-label="深圳作品" hidden>
+      <button type="button" class="spot-chip" data-spot="">全部深圳<i>1</i></button>
+      <button type="button" class="spot-chip" data-spot="深圳之眼">深圳之眼<i>1</i></button>
+    </div>
+
+    <div class="spot-menu" id="menu-beihai" role="menu" aria-label="北海作品" hidden>
+      <button type="button" class="spot-chip" data-spot="">全部北海<i>3</i></button>
+      <button type="button" class="spot-chip" data-spot="海神广场">海神广场<i>1</i></button>
+      <button type="button" class="spot-chip" data-spot="银滩">银滩 · 海滩<i>2</i></button>
+    </div>
+
+    <div class="spot-menu" id="menu-chongzuo" role="menu" aria-label="扶绥区域筛选" hidden>
+      <button type="button" class="spot-chip" data-spot="">全部扶绥<i>22</i></button>
+      <button type="button" class="spot-chip" data-spot="左江">左江<i>6</i></button>
+      <button type="button" class="spot-chip" data-spot="县城">县城<i>16</i></button>
     </div>
 
     <div class="works-feed">
 
       <div class="works-cat" data-cat="天体"><h3>天体</h3><i></i></div>
 
-<section class="work" data-cat="天体">
+<section class="work" data-cat="天体" data-spot="月面">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="凸月月面特写：月海、环形山与第谷辐射纹在黑夜里清晰可见" src="assets/photos/12-moon-gibbous.jpg">
         </figure>
@@ -75,11 +125,10 @@
           <h3 class="work-title">月亮 · 九月末的凸月</h3>
           <p class="work-desc">长焦怼月亮——月海的轮廓、环形山的边缘、第谷溅出来的辐射纹，全在。不用飞三十八万公里，等一个晴夜，把快门按下去就行。「yes, moonth.」</p>
           <p class="work-meta">月面特写 · 凸月 · 2026.09.25 前后</p>
-          <button type="button" class="btn btn-primary" data-goto-shape="0">去星河里看看</button>
         </div>
       </section>
 
-<section class="work" data-cat="天体">
+<section class="work" data-cat="天体" data-spot="银河">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="扶绥姑龙水库银河拱桥全景：银心亮得发红，一条乡道直伸进星场" src="assets/photos/21-gulong-milkyway-arch.jpg">
         </figure>
@@ -88,11 +137,10 @@
           <h3 class="work-title">姑龙水库 · 银河拱桥</h3>
           <p class="work-desc">扶绥县东门镇，姑龙水库。银河从两山之间整个拱过来，银心亮得发红，一条乡道直直伸进星场里。拍银河不用去高原，油门踩到位，黑就是最好的滤镜。</p>
           <p class="work-meta">广西崇左 · 扶绥县东门镇姑龙水库 · 银河拱桥 · 2026.08.13</p>
-          <button type="button" class="btn btn-primary" data-goto-shape="0">去星河里看看</button>
         </div>
       </section>
 
-<section class="work" data-cat="天体">
+<section class="work" data-cat="天体" data-spot="银河">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="扶绥姑龙水库银河竖拍：银心立在水面上，山影与星光一同倒映湖中" src="assets/photos/22-gulong-milkyway-lake.jpg">
         </figure>
@@ -104,9 +152,9 @@
         </div>
       </section>
 
-      <div class="works-cat" data-cat="桂林 · 市区山水"><h3>桂林 · 市区山水</h3><i></i></div>
+      <div class="works-cat" data-cat="桂林"><h3>桂林</h3><i></i></div>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="叠彩山">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林叠彩山俯瞰木龙湖蓝调夜景：亮灯的木龙塔、黑瓦古建群与背后的喀斯特峰林" src="assets/photos/02-guilin-diecai-mulonghu-bluehour.jpg">
         </figure>
@@ -118,7 +166,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="叠彩山">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林叠彩山木龙湖黄金时刻：夕阳把峰林与古建染成蜂蜜色" src="assets/photos/03-guilin-diecai-mulonghu-goldenhour.jpg">
         </figure>
@@ -130,7 +178,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="虞山公园">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林虞山公园欧洲园：老榕树枝干横过石板路，身后是爬满藤蔓的罗马柱石廊与喷泉" src="assets/photos/08-guilin-yushan-park-arches.jpg">
         </figure>
@@ -142,7 +190,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="虞山公园">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林虞山公园欧洲园中轴叠水：水沿台阶层层跌落，两侧棕榈与模纹花坛对称排开" src="assets/photos/09-guilin-yushan-park-cascade.jpg">
         </figure>
@@ -154,7 +202,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="虞山公园">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林虞山公园欧洲园：石柱拱廊爬满牵牛花藤，喷泉水雾在阳光下飘散" src="assets/photos/10-guilin-yushan-park-colonnade.jpg">
         </figure>
@@ -166,7 +214,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="穿山">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林穿山景区俯瞰：明代寿佛塔立在塔山之顶，江湖绕城，喀斯特峰林与城市天际线同框" src="assets/photos/11-guilin-tashan-pagoda.jpg">
         </figure>
@@ -178,7 +226,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="榕湖">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="桂林榕湖：红柱亭与红灯笼倒映在湖面，傍晚的光从树叶间漏下来" src="assets/photos/14-guilin-ronghu-pavilion.jpg">
         </figure>
@@ -190,7 +238,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="榕湖">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林榕湖水晶玻璃桥：整座桥的栏杆与亭子为玻璃构造，阳光下通体透亮，倒影入水" src="assets/photos/15-guilin-ronghu-glass-bridge.jpg">
         </figure>
@@ -202,7 +250,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="榕湖">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林榕杉湖夜色：提灯乌篷船停在湖面，暖光落进水里" src="assets/photos/16-guilin-rongshahu-night-boat.jpg">
         </figure>
@@ -214,9 +262,7 @@
         </div>
       </section>
 
-      <div class="works-cat" data-cat="桂林 · 临桂新区"><h3>桂林 · 临桂新区</h3><i></i></div>
-
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="日月双塔">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="桂林杉湖日月双塔夜景：金色日塔与银白月塔倒映湖中" src="assets/photos/17-guilin-shanhu-sun-moon-pagodas.jpg">
         </figure>
@@ -228,7 +274,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 市区山水">
+<section class="work" data-cat="桂林" data-spot="乾景广场">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="桂林联发乾景广场：弧形混凝土雨棚下的中央空中花园玻璃塔与台阶" src="assets/photos/04-guilin-lianfa-qianjing-plaza.jpg">
         </figure>
@@ -240,7 +286,7 @@
         </div>
       </section>
 
-<section class="work" data-cat="桂林 · 临桂新区">
+<section class="work" data-cat="桂林" data-spot="临桂">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="桂林临桂新区夜景：一院两馆仿古建筑群与双子塔同框，背后是喀斯特峰林" src="assets/photos/05-guilin-lingui-cbd-night.jpg">
         </figure>
@@ -252,14 +298,352 @@
         </div>
       </section>
 
+<section class="work" data-cat="桂林" data-spot="乾景广场">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="乾景广场 · 混凝土天窗" src="assets/photos/25-guilin-lianfa-plaza-atrium.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 16 · 建筑几何</p>
+          <h3 class="work-title">乾景广场 · 混凝土天窗</h3>
+          <p class="work-desc">从底层往上仰，整栋楼的坡道、木格栅和天窗被压成一个斜的剖面。混凝土不需要装饰，光从顶上漏下来，自己就会画线。</p>
+          <p class="work-meta">广西桂林 · 叠彩区站前路29号 · 联发乾景广场 · 室内仰拍</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="乾景广场">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="乾景广场 · 蓝调游乐场" src="assets/photos/26-guilin-lianfa-plaza-playground.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 17 · 蓝调时刻</p>
+          <h3 class="work-title">乾景广场 · 蓝调游乐场</h3>
+          <p class="work-desc">橙色攀爬网横在广场中央，像谁随手丢下的一团线。天刚暗到最蓝的那几分钟，弧形连廊的灯一条条亮起来，商业街终于安静下来。</p>
+          <p class="work-meta">广西桂林 · 联发乾景广场 · 蓝调时刻</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="乾景广场">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="乾景广场 · 垂直花园" src="assets/photos/27-guilin-lianfa-plaza-vertical-garden.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 18 · 建筑几何</p>
+          <h3 class="work-title">乾景广场 · 垂直花园</h3>
+          <p class="work-desc">一整面楼被绿植吃掉，中间嵌一条玻璃电梯井，LED 雪花沿着它往上爬。弧形天棚把天空框成一个圆角，台阶上贴着黄色警示条——结构越冷，植物越显得倔。</p>
+          <p class="work-meta">广西桂林 · 联发乾景广场 · 中央垂直绿化塔</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="乾景广场">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="乾景广场 · 立体街区" src="assets/photos/28-guilin-lianfa-plaza-night.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 19 · 城市夜色</p>
+          <h3 class="work-title">乾景广场 · 立体街区</h3>
+          <p class="work-desc">站在中庭抬头，四周的连廊一层层退上去，玻璃、钢架、绿植和灯带缠在一起。这里没有一条正经的街，却把逛街这件事做成了爬山。</p>
+          <p class="work-meta">广西桂林 · 联发乾景广场 · 中庭广角</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="榕湖">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="榕湖饭店 · 弧与天" src="assets/photos/29-guilin-ronghu-hotel-arc.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 20 · 建筑几何</p>
+          <h3 class="work-title">榕湖饭店 · 弧与天</h3>
+          <p class="work-desc">白色弧墙转了一圈，把天空削出一个不规则的圆。旁边是绿玻璃幕墙，左上角探进一枝树叶。建筑最动人的时候，往往只是它替天空做了个画框。</p>
+          <p class="work-meta">广西桂林 · 榕湖饭店 · 弧形外墙</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="两江四湖">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="解放桥头 · 环岛黄昏" src="assets/photos/30-guilin-jiefang-bridge-roundabout.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 21 · 城市俯瞰</p>
+          <h3 class="work-title">解放桥头 · 环岛黄昏</h3>
+          <p class="work-desc">解放桥的拱、环岛里一整圈棕榈、漓江的水，还有远处一层层退下去的喀斯特。飞机云在天上划了两道叉，城市在脚下按自己的节奏转圈。</p>
+          <p class="work-meta">广西桂林 · 解放桥头环岛（滨江路）· 黄昏</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="山水公园">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="山水公园 · 月亮门" src="assets/photos/31-guilin-shanshui-park-moon-gate.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 22 · 园林</p>
+          <h3 class="work-title">山水公园 · 月亮门</h3>
+          <p class="work-desc">青砖墙开一个圆，门里一棵老树逆着光站，远处塔尖刚好露在树缝里。中国园林最会用一堵墙做减法——把世界裁成一个圆，剩下的交给光。</p>
+          <p class="work-meta">广西桂林 · 临桂区山水公园 · 月亮门</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="逍遥楼">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="逍遥楼 · 飞檐" src="assets/photos/32-guilin-xiaoyao-tower-eave.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 23 · 古建</p>
+          <h3 class="work-title">逍遥楼 · 飞檐</h3>
+          <p class="work-desc">贴着屋檐往上仰，木构的椽子一根根收向尖角，蓝天白云在后面铺开。二十三点六米的高度，靠这一角就能说清唐宋的脾气。</p>
+          <p class="work-meta">广西桂林 · 秀峰区滨江路 · 逍遥楼 · 仰拍</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="逍遥楼">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="逍遥楼 · 逆光" src="assets/photos/33-guilin-xiaoyao-tower.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 24 · 古建</p>
+          <h3 class="work-title">逍遥楼 · 逆光</h3>
+          <p class="work-desc">三层飞檐压着汉白玉台阶，红灯笼挂了一排，太阳从右侧斜切进来。重建的楼，站的位置还是唐代那个——漓江在背后，城市在楼下。</p>
+          <p class="work-meta">广西桂林 · 秀峰区滨江路 · 逍遥楼 · 日落</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="两江四湖">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="丽泽桥 · 红桥" src="assets/photos/34-guilin-lize-bridge.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 25 · 城市桥梁</p>
+          <h3 class="work-title">丽泽桥 · 红桥</h3>
+          <p class="work-desc">橙红色的自锚式悬索桥横在江上，双塔拉起的钢索一根根数得清。桂林人叫它红桥，两江四湖夜游的船从桥下过，桥身把天光又反了一遍。</p>
+          <p class="work-meta">广西桂林 · 两江四湖 · 丽泽桥 · 晴日</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="两江四湖">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="滨江路 · 绿色隧道" src="assets/photos/35-guilin-binjiang-road-tunnel.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 26 · 城市街景</p>
+          <h3 class="work-title">滨江路 · 绿色隧道</h3>
+          <p class="work-desc">两排老树把整条路罩成一条绿色隧道，光从叶缝里漏下来，落在电动车和行人身上。桂林最日常的一段路，抬头就是拱顶。</p>
+          <p class="work-meta">广西桂林 · 滨江路 · 林荫道</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="日月双塔">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="杉湖 · 彩幕" src="assets/photos/36-guilin-sun-moon-pagodas-ribbon.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 27 · 装置</p>
+          <h3 class="work-title">杉湖 · 彩幕</h3>
+          <p class="work-desc">粉、蓝、白、红一层层叠成波浪，被风撑着，光从背面透过来。杉湖边的临时装置，比双塔更像一场梦。</p>
+          <p class="work-meta">广西桂林 · 杉湖 · 日月双塔前 · 艺术装置</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="象鼻山">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="象鼻山 · 龙灯夜" src="assets/photos/37-guilin-elephant-hill-dragon-boat.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 28 · 夜景</p>
+          <h3 class="work-title">象鼻山 · 龙灯夜</h3>
+          <p class="work-desc">水月洞被灯烧成一个橙色的圆，竹筏上一条龙灯正亮着，撑筏的人和游客都成了剪影。白天它是课本上的象鼻山，晚上才像活的。</p>
+          <p class="work-meta">广西桂林 · 象鼻山 · 水月洞 · 夜</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="虞山公园">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="虞帝庙 · 石桥与匾" src="assets/photos/38-guilin-yushan-yudi-temple-detail.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 29 · 古建</p>
+          <h3 class="work-title">虞帝庙 · 石桥与匾</h3>
+          <p class="work-desc">绿瓦、红柱、金字匾额，石栏杆一层层往台阶上排，黄叶从旁边探出来。颜色撞得厉害，却一点不俗——老庙的审美从来不客气。</p>
+          <p class="work-meta">广西桂林 · 虞山公园 · 虞帝庙 · 日间</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="虞山公园">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="虞帝庙 · 三桥" src="assets/photos/39-guilin-yushan-yudi-temple.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 30 · 古建</p>
+          <h3 class="work-title">虞帝庙 · 三桥</h3>
+          <p class="work-desc">财运桥、官运桥、平安桥并排跨过放生池，红门绿瓦，背后山上有亭。虞山公园最完整的一眼，全在这条中轴上。</p>
+          <p class="work-meta">广西桂林 · 虞山公园 · 虞帝庙 · 三桥</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="穿山">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="穿山公园亭上俯瞰：小东江水面逆光，喀斯特峰林与桂林城" src="assets/photos/40-guilin-chuanshan-park-overlook.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 31 · 登高俯瞰</p>
+          <h3 class="work-title">穿山公园 · 江与城</h3>
+          <p class="work-desc">从穿山公园的亭子往下看，小东江拐了一个弯，水面被阳光点成一片碎金；喀斯特一座座从城里长出来，桥和栈道把水缝在一起。桂林的城市和山水，从来不是邻居，是同一间屋子。</p>
+          <p class="work-meta">广西桂林 · 七星区穿山公园 · 亭上俯瞰</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="象鼻山">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="象鼻山 · 水月洞" src="assets/photos/41-guilin-elephant-hill-water-moon-cave.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 32 · 蓝调</p>
+          <h3 class="work-title">象鼻山 · 水月洞</h3>
+          <p class="work-desc">天刚擦黑，水月洞先亮起来，橙色的光落在江面上拉成一条。山是黑的，洞是烧着的，船在右下角安静地等客。</p>
+          <p class="work-meta">广西桂林 · 象鼻山 · 水月洞 · 蓝调时刻</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="美食">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="桂林 · 一碗卤菜粉" src="assets/photos/48-guilin-rice-noodles.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 33 · 市井</p>
+          <h3 class="work-title">桂林 · 一碗卤菜粉</h3>
+          <p class="work-desc">不锈钢碗、卤牛肉、半个卤蛋、一勺红油，勺子斜插在汤里。桂林人的一天从这碗开始，游客的滤镜在这碗面前没用。</p>
+          <p class="work-meta">广西桂林 · 街边米粉店 · 卤菜粉</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="叠彩山">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="叠彩山 · 城与峰" src="assets/photos/49-guilin-diecai-overlook.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 34 · 登高俯瞰</p>
+          <h3 class="work-title">叠彩山 · 城与峰</h3>
+          <p class="work-desc">站在叠彩山往下看，漓江在城里拐了个弯，峰林一圈圈围过来，楼房像撒在绿地上的白棋子。桂林的天际线不是楼，是山。</p>
+          <p class="work-meta">广西桂林 · 叠彩区 · 叠彩山 · 俯瞰漓江与城</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="漓江">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="漓江 · 河湾" src="assets/photos/50-guilin-lijiang-riverbend.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 35 · 山河</p>
+          <h3 class="work-title">漓江 · 河湾</h3>
+          <p class="work-desc">U 形的江湾、一座平直的梁桥、岸边的沙滩和菜地，远处城市压在山脚下。漓江在这里不表演，只是流。</p>
+          <p class="work-meta">广西桂林 · 漓江 · 河湾俯瞰</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="榕湖">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="榕湖 · 玻璃桥（晴）" src="assets/photos/70-guilin-ronghu-glass-bridge-day.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 36 · 园林</p>
+          <h3 class="work-title">榕湖 · 玻璃桥（晴）</h3>
+          <p class="work-desc">水晶玻璃的桥身、连排的玻璃廊柱，倒影被水波揉碎又拼起来。晚上它是蓝的，白天它几乎是透明的。</p>
+          <p class="work-meta">广西桂林 · 榕湖 · 水晶玻璃桥 · 晴日</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="桂林" data-spot="榕湖">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="榕湖 · 三角窗" src="assets/photos/71-guilin-ronghu-hotel-facade.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 37 · 建筑几何</p>
+          <h3 class="work-title">榕湖 · 三角窗</h3>
+          <p class="work-desc">白色粗糙的墙面，一排排三角形凸窗，光从侧面切进来，阴影把整面墙变成了棋盘。酒店的外墙，比大堂好看。</p>
+          <p class="work-meta">广西桂林 · 榕湖 · 酒店外墙</p>
+        </div>
+      </section>
+
+      <div class="works-cat" data-cat="南宁"><h3>南宁</h3><i></i></div>
+
+<section class="work" data-cat="南宁" data-spot="内街">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="南宁 · 夜市招牌" src="assets/photos/42-nanning-neijie-sign.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 38 · 城市夜色</p>
+          <h3 class="work-title">南宁 · 夜市招牌</h3>
+          <p class="work-desc">一整面楼的霓虹一起亮，巨大的「南宁」两个字压在最上面，底下是临胜烧烤和横县鱼生。这座城市的夜，是拿灯牌堆出来的。</p>
+          <p class="work-meta">广西南宁 · 内街文化创意园 · 夜</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="南宁" data-spot="内街">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="内街 · 小城围厨" src="assets/photos/43-nanning-neijie-neon-building.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 39 · 城市夜色</p>
+          <h3 class="work-title">内街 · 小城围厨</h3>
+          <p class="work-desc">一栋小楼被招牌包满，NEW NEIGH NIGHT 的粉色灯管压着「小城围厨」四个字。卷帘门半拉，树影投在墙上——这才是夜市的底噪。</p>
+          <p class="work-meta">广西南宁 · 内街文化创意园 · 夜</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="南宁" data-spot="内街">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="内街 · 超级内街" src="assets/photos/44-nanning-neijie-super-street.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 40 · 城市夜色</p>
+          <h3 class="work-title">内街 · 超级内街</h3>
+          <p class="work-desc">头顶一片星星灯，两侧招牌往上叠：「做自己」「恩抱世界 壮告人间」。一个人提着袋子往巷子深处走，整条街的霓虹都成了他的背景。</p>
+          <p class="work-meta">广西南宁 · 内街文化创意园 · 超级内街</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="南宁" data-spot="内街">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="内街 · 打边炉" src="assets/photos/45-nanning-neijie-alley.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 41 · 市井</p>
+          <h3 class="work-title">内街 · 打边炉</h3>
+          <p class="work-desc">老冰箱、竹竿、瓷砖墙，招牌写着「财胜洗货研究所」和「临胜打边炉」。霓虹照不到的地方，才是这条街真正的样子。</p>
+          <p class="work-meta">广西南宁 · 内街文化创意园 · 巷内</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="南宁" data-spot="南湖">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="南湖 · 摩天轮" src="assets/photos/46-nanning-nanhu-ferris-wheel.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 42 · 城市</p>
+          <h3 class="work-title">南湖 · 摩天轮</h3>
+          <p class="work-desc">摩天轮停在湖边，红白轿厢一圈圈挂着；左边是广西医科大学的大楼，湖面上一只天鹅船慢悠悠划过。南宁的下午，就该这么闲。</p>
+          <p class="work-meta">广西南宁 · 青秀区 · 南湖公园</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="南宁" data-spot="南湖">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="南湖 · 天际线" src="assets/photos/47-nanning-nanhu-skyline.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 43 · 城市</p>
+          <h3 class="work-title">南湖 · 天际线</h3>
+          <p class="work-desc">南湖对岸，PEAK 的楼、圆顶的酒店、一排排水岸住宅；黄顶游船从湖心开过，把倒影切开又合上。城市的正面，隔着一湖水看最好。</p>
+          <p class="work-meta">广西南宁 · 南湖 · 城市天际线</p>
+        </div>
+      </section>
+
       <div class="works-cat" data-cat="深圳"><h3>深圳</h3><i></i></div>
 
-<section class="work" data-cat="桂林 · 临桂新区">
+<section class="work" data-cat="桂林" data-spot="山水公园">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="桂林临桂山水公园夜景：状元桥上的唐风楼阁鎏金亮灯，桥孔染成蓝色，远处双子塔仍在亮灯" src="assets/photos/13-guilin-shanshui-park-zhuangyuanlou.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 16 · 桂林夜色</p>
+          <p class="work-kicker">WORK 44 · 桂林夜色</p>
           <h3 class="work-title">山水公园 · 状元楼</h3>
           <p class="work-desc">临桂山水公园，九十九米九孔的状元桥横在水上，桥头的状元楼按唐风起翘，灯一亮整座桥像鎏金的；桥孔被染成蓝色，一弯一弯排过去。远处新区的双子塔还亮着——仿古和新城，隔水对望。</p>
           <p class="work-meta">广西桂林 · 临桂区山水公园 · 状元桥与状元楼 · 亮灯后</p>
@@ -268,101 +652,329 @@
 
       <div class="works-cat" data-cat="北海"><h3>北海</h3><i></i></div>
 
-<section class="work" data-cat="桂林 · 临桂新区">
+<section class="work" data-cat="桂林" data-spot="临桂">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="临桂双子塔仰视：塔冠灯带亮成金红色，路口路牌与行人入镜" src="assets/photos/18-guilin-lingui-twin-towers-night.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 17 · 城市夜色</p>
+          <p class="work-kicker">WORK 45 · 城市夜色</p>
           <h3 class="work-title">临桂 · 双子塔下</h3>
           <p class="work-desc">新区的双子塔从路口仰上去，塔冠的灯一层层亮成金红，路牌上写着电梯厅和购物中心。站到塔底下看，楼是真的在往上长。</p>
           <p class="work-meta">广西桂林 · 临桂新区 · 双子塔 · 夜</p>
         </div>
       </section>
 
+<section class="work" data-cat="北海" data-spot="银滩">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="北海 · 搁浅的木船" src="assets/photos/68-beihai-beach-old-boat.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 46 · 海</p>
+          <h3 class="work-title">北海 · 搁浅的木船</h3>
+          <p class="work-desc">一条老木船搁在沙滩上，船身被海风啃出木纹，远处有人在水里走。海不急着收走它，也不急着淹掉它。</p>
+          <p class="work-meta">广西北海 · 海滩 · 搁浅木船</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="北海" data-spot="银滩">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="北海 · 滩涂与海" src="assets/photos/69-beihai-beach-aerial.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 47 · 航拍</p>
+          <h3 class="work-title">北海 · 滩涂与海</h3>
+          <p class="work-desc">退潮后的滩涂摊开一大片，水道像叶脉；右边是绿得发亮的高尔夫球场，左边是海。一条海岸线，两种活法。</p>
+          <p class="work-meta">广西北海 · 海滩航拍 · 退潮</p>
+        </div>
+      </section>
+
       <div class="works-cat" data-cat="崇左 · 扶绥"><h3>崇左 · 扶绥</h3><i></i></div>
 
-<section class="work" data-cat="深圳">
+<section class="work" data-cat="深圳" data-spot="深圳之眼">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="深圳岗厦北枢纽「深圳之眼」：米字件网状穹顶与中央天眼，下方是全透明玻璃隧道" src="assets/photos/06-shenzhen-gangxia-bei-eye.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 18 · 室内建筑</p>
+          <p class="work-kicker">WORK 48 · 室内建筑</p>
           <h3 class="work-title">深圳岗厦北 · 深圳之眼</h3>
           <p class="work-desc">地下五线换乘的中庭。抬头，一万两千多个「米字件」按费马螺线织成一张网，正中间一颗直径九米的「天眼」把阳光直直砸到地下；脚下一段全透明玻璃隧道，列车在里面穿行。四十八乘五十一点二米的无柱大跨，一根柱子都不用来撑场面 —— 被叫「深圳之眼」不是没道理。</p>
           <p class="work-meta">广东深圳 · 福田区岗厦北枢纽 · 中庭「深圳之眼」 · 室内建筑</p>
         </div>
       </section>
 
-<section class="work" data-cat="北海">
+<section class="work" data-cat="北海" data-spot="海神广场">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="广西北海海神广场前沙滩退潮：两人站在混凝土块旁，面前是宽阔的滩涂与海浪" src="assets/photos/07-beihai-haishen-square-lowtide.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 19 · 海与人</p>
+          <p class="work-kicker">WORK 49 · 海与人</p>
           <h3 class="work-title">北海 · 海神广场退潮</h3>
           <p class="work-desc">北海银海区海景大道，海神广场前。波塞冬手持三叉戟面朝大海，我们在退潮的滩涂上站着 —— 浪推上来一层白，再退回去，沙面亮得像刚洗过。旁边就是大墩海，潮水带又长又平，弯腰能耙到贝类和小蟹；治「城市病」的成本，一张动车票。</p>
           <p class="work-meta">广西北海 · 银海区海景大道 · 海神广场前沙滩 · 退潮时分</p>
         </div>
       </section>
 
-<section class="work" data-cat="崇左 · 扶绥">
+<section class="work" data-cat="崇左 · 扶绥" data-spot="左江">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="广西崇左扶绥：左江上空的火烧云，江面被染成金色光带，远处喀斯特峰林与糖厂烟囱同框" src="assets/photos/01-fusui-zuojiang-sunset.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 20 · 江河晚霞</p>
+          <p class="work-kicker">WORK 50 · 江河晚霞</p>
           <h3 class="work-title">扶绥 · 左江火烧云</h3>
           <p class="work-desc">广西崇左扶绥，文化广场边上就是左江。太阳往峰林里一沉，整条江被烧成一条金带，喀斯特一列列排到天边，糖厂的烟囱杵在中间不躲不闪 —— 小城的工业与山水，在霞光里各占一半。徐霞客写过「北有漓江，南有左江」，今天算是对上了。</p>
           <p class="work-meta">广西崇左 · 扶绥县文化广场 · 左江畔 · 日落霞光</p>
         </div>
       </section>
 
-      <section class="work" data-cat="崇左 · 扶绥">
+      <section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="扶绥县城俯瞰：湖心小岛被学校与民房环绕，傍晚光线温暖" src="assets/photos/19-fusui-county-town-lake.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 21 · 小城</p>
+          <p class="work-kicker">WORK 51 · 小城</p>
           <h3 class="work-title">扶绥 · 县城与湖</h3>
           <p class="work-desc">扶绥县城的高处看下去，湖心留着一个小岛，学校和民房一层层围着水排开。小城不大，绿得奢侈。</p>
           <p class="work-meta">广西崇左 · 扶绥县城 · 傍晚俯瞰</p>
         </div>
       </section>
 
-      <section class="work" data-cat="崇左 · 扶绥">
+      <section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
         <figure class="work-media is-tall">
           <img loading="lazy" alt="扶绥县城路口夜景：长曝光把车灯拉成红黄光轨，农商行招牌亮灯" src="assets/photos/20-fusui-county-night-traffic.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 22 · 小城</p>
+          <p class="work-kicker">WORK 52 · 小城</p>
           <h3 class="work-title">扶绥 · 县城路口</h3>
           <p class="work-desc">县城的十字路口，长曝光把车灯拉成红黄两股，农商行的招牌亮着。小城的夜不吵，但一直亮着。</p>
           <p class="work-meta">广西崇左 · 扶绥县城 · 夜 · 长曝光</p>
         </div>
       </section>
 
-      <section class="work" data-cat="崇左 · 扶绥">
+      <section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="扶绥县城老街夜色：山海冰室木招牌亮灯，藤椅摆满人行道" src="assets/photos/23-fusui-night-street.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 23 · 小城</p>
+          <p class="work-kicker">WORK 53 · 小城</p>
           <h3 class="work-title">扶绥 · 老街夜色</h3>
           <p class="work-desc">县城的老街入夜才醒——「山海冰室」的木招牌亮着，一排排藤椅摆到人行道上，橙光把半条街染成暖色。冰室、糖水、夜风，小城的夜从这里开始。</p>
           <p class="work-meta">广西崇左 · 扶绥县城 · 山海冰室老街 · 夜</p>
         </div>
       </section>
 
-      <section class="work" data-cat="崇左 · 扶绥">
+      <section class="work" data-cat="崇左 · 扶绥" data-spot="左江">
         <figure class="work-media is-wide">
           <img loading="lazy" alt="扶绥文化广场左江灯塔日落：白塔立于圆形广场，晚霞把整条江染成橘色" src="assets/photos/24-fusui-lighthouse-sunset.jpg">
         </figure>
         <div class="work-info">
-          <p class="work-kicker">WORK 24 · 江河晚霞</p>
+          <p class="work-kicker">WORK 54 · 江河晚霞</p>
           <h3 class="work-title">扶绥 · 左江灯塔</h3>
           <p class="work-desc">文化广场旁的左江灯塔，塔身画着恐龙——扶绥可是「恐龙之乡」。晚霞烧到最旺的时候，整条江和广场全泡在橘色里，塔是画面里唯一的白。</p>
           <p class="work-meta">广西崇左 · 扶绥县文化广场 · 左江灯塔 · 日落霞光</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 清货" src="assets/photos/51-fusui-commercial-street.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 55 · 小城</p>
+          <h3 class="work-title">扶绥 · 清货</h3>
+          <p class="work-desc">「合同期满 紧急结业 全场 2 折」，红底黄字糊满整栋楼，车停在门口，老板站在阴影里。小城的商业，全靠这种大嗓门。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 商业街</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥 · 喜盈盈" src="assets/photos/52-fusui-old-street-wedding.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 56 · 小城</p>
+          <h3 class="work-title">扶绥 · 喜盈盈</h3>
+          <p class="work-desc">窄巷两边是掉漆的楼，一块「喜盈盈婚纱」的竖招牌挂在半空，红字被太阳晒得发白。婚纱店开在这种巷子里，反而真实。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 老街</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 程姐便利店" src="assets/photos/53-fusui-old-street-convenience.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 57 · 小城</p>
+          <h3 class="work-title">扶绥 · 程姐便利店</h3>
+          <p class="work-desc">程姐的便利店、晨光的文具、头顶一条雪花啤酒的蓝横幅，摩托车停在路中间。放学时间的县城，声音比画面多。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 老街</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 老娘大牌档" src="assets/photos/54-fusui-laoniang-food-stall.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 58 · 小城</p>
+          <h3 class="work-title">扶绥 · 老娘大牌档</h3>
+          <p class="work-desc">「扶绥酸粥鱼」「非物质文化遗产」「央视推荐」，一整面墙的招牌垒在一起，电动车随便一停。小城的招牌，比菜还下饭。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 老娘大牌档</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥 · 店里的猫" src="assets/photos/55-fusui-cat.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 59 · 小城</p>
+          <h3 class="work-title">扶绥 · 店里的猫</h3>
+          <p class="work-desc">店里的灯只照亮它一张脸，身后是一排黑掉的椅子。它站在湿漉漉的地砖上看着你，像这家店真正的老板。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 店内</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥 · 美宜佳" src="assets/photos/56-fusui-meiyijia-night.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 60 · 夜色</p>
+          <h3 class="work-title">扶绥 · 美宜佳</h3>
+          <p class="work-desc">红底白字的招牌亮得像一块灯箱，店里两个穿黄衣服的人在理货。门口一辆电动车拖出虚影——夜里的县城，只有便利店还醒着。</p>
+          <p class="work-meta">广西崇左 · 扶绥县城 · 夜</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 加油站" src="assets/photos/57-fusui-sinopec-night.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 61 · 夜色</p>
+          <h3 class="work-title">扶绥 · 加油站</h3>
+          <p class="work-desc">中国石化的红顶在夜里格外亮，92 号的价格挂在加油机上，湿地把红绿灯光全反了一遍。凌晨的加油站，是城市最后一盏灯。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 中国石化加油站 · 夜</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 红砖与水池" src="assets/photos/58-fusui-brick-estate-pond.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 62 · 建筑</p>
+          <h3 class="work-title">扶绥 · 红砖与水池</h3>
+          <p class="work-desc">英伦风的红砖坡屋顶，倒映在一池静水里，云也被照抄了一份。小城的楼盘，也想做一场欧洲的梦。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 楼盘水景</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥 · 塔楼下的市集" src="assets/photos/59-fusui-euro-tower-market.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 63 · 建筑</p>
+          <h3 class="work-title">扶绥 · 塔楼下的市集</h3>
+          <p class="work-desc">米黄色的八角塔楼顶着一顶锥形帽，底下是水果摊、遮阳伞和烧腊店。欧洲的壳，广西的里子。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 欧式商业街</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 草地秋千" src="assets/photos/60-fusui-swing-meadow.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 64 · 郊野</p>
+          <h3 class="work-title">扶绥 · 草地秋千</h3>
+          <p class="work-desc">木架、白纱、花环，一架秋千立在草地上，背后是稻田、电塔和一大朵积云。婚礼布景没人用的时候，反而更像诗。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 郊野草坪</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 湖与岛" src="assets/photos/61-fusui-lake-park.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 65 · 小城</p>
+          <h3 class="work-title">扶绥 · 湖与岛</h3>
+          <p class="work-desc">湖心两个小岛、木栈道绕着岸走、远处一排住宅楼。县城的公园不精致，但够大，够让一家人走一下午。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 湖景公园</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="扶绥 · 乡路落日" src="assets/photos/62-fusui-country-road-sunset.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 66 · 郊野</p>
+          <h3 class="work-title">扶绥 · 乡路落日</h3>
+          <p class="work-desc">一条碎石路直直插进夕阳，左边铁丝网、右边菜地，电线的影子拉得老长。小城最奢侈的东西，是这种没人催你走的路。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 郊野 · 日落</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="左江">
+        <figure class="work-media is-wide">
+          <img loading="lazy" alt="左江 · 游船" src="assets/photos/63-fusui-zuojiang-cruise.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 67 · 江河</p>
+          <h3 class="work-title">左江 · 游船</h3>
+          <p class="work-desc">白色游船停在码头，背后是长满树的喀斯特山和一支旧烟囱。左江的水不急，船也不急。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 左江 · 码头</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="县城">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="扶绥 · 江滨红亭" src="assets/photos/64-fusui-riverside-pavilion.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 68 · 小城</p>
+          <h3 class="work-title">扶绥 · 江滨红亭</h3>
+          <p class="work-desc">一条林荫道，右边一排红柱橙瓦的凉亭，树影把路面切成一条条。县城的下午，路上没什么人。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 江滨路</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="左江">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="左江 · 红船" src="assets/photos/65-fusui-zuojiang-red-boats.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 69 · 江河</p>
+          <h3 class="work-title">左江 · 红船</h3>
+          <p class="work-desc">几条铁皮船靠岸停着，船身的红漆掉得差不多，缆绳拴在树干上。江边没有游客，只有过日子的船。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 左江 · 渔船</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="左江">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="左江 · 灯塔（晴）" src="assets/photos/66-fusui-zuojiang-lighthouse-day.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 70 · 江河</p>
+          <h3 class="work-title">左江 · 灯塔（晴）</h3>
+          <p class="work-desc">白色圆塔顶着橙色塔帽，塔身画着褪色的彩绘，脚下是圆形广场和栏杆。它不是航标，是小城的一个坐标。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 左江灯塔 · 晴日</p>
+        </div>
+      </section>
+
+<section class="work" data-cat="崇左 · 扶绥" data-spot="左江">
+        <figure class="work-media is-tall">
+          <img loading="lazy" alt="左江 · 蓝顶船" src="assets/photos/67-fusui-zuojiang-blue-boats.jpg">
+        </figure>
+        <div class="work-info">
+          <p class="work-kicker">WORK 71 · 江河</p>
+          <h3 class="work-title">左江 · 蓝顶船</h3>
+          <p class="work-desc">一排蓝布顶的渔船贴着岸，轮胎挂在船舷上当防撞垫，远处是山和另一条游船。左江的日常，停着比开着好看。</p>
+          <p class="work-meta">广西崇左 · 扶绥 · 左江 · 渔船</p>
         </div>
       </section>
 
@@ -430,19 +1042,20 @@
   </section>
 
   <footer class="footer">
-    <span>© 2026 Lodolin 的奇妙世界</span>
+    <span>© 2026 Lodolin</span>
     <i class="foot-sep" aria-hidden="true"></i>
     <span>整活向 &amp; 非官方站</span>
   </footer>
 </div>
 
+<button type="button" class="to-top" id="to-top" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+    <path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="vendor/three.min.js"></script>
-<script src="js/galaxy.js"></script>
-<script src="js/earth.js"></script>
-<script src="js/morph.js"></script>
-<script src="js/stage.js"></script>
-<script src="js/app.js"></script>
+<script src="js/app.js?v=20261123o"></script>
 </body>
 </html>
