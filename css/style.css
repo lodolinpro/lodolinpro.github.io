@@ -513,6 +513,103 @@ svg { display: block; }
   text-align: center;
 }
 
+/* 器材四宫格 */
+.gear-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 28px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.gear-grid figure {
+  margin: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #0d0d0d;
+  box-shadow: 0 18px 36px rgba(0,0,0,.55);
+}
+.gear-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+.gear-caption {
+  max-width: 1200px;
+  margin: 18px auto 0;
+  padding: 0 clamp(18px, 4vw, 28px);
+}
+.gear-caption p {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.8;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
+/* 一图一卡：左图右参数 */
+.gear-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.gear-item {
+  display: grid;
+  grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+  gap: 26px;
+  align-items: stretch;
+}
+.gear-photo {
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #0d0d0d;
+  box-shadow: 0 18px 36px rgba(0,0,0,.55);
+}
+.gear-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gear-item .gear-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ZV-E10 为横图：整组改为上图下卡 */
+.gear-item.is-wide-photo {
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.gear-item.is-wide-photo .gear-photo,
+.gear-item.is-wide-photo .gear-card {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.gear-item.is-wide-photo .gear-photo img {
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+.gear-item.is-wide-photo .gear-card {
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .gear-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gear-item { grid-template-columns: 1fr; gap: 14px; }
+  .gear-photo { width: 100%; max-width: 520px; margin: 0 auto; }
+  .gear-photo img { height: auto; aspect-ratio: 3 / 4; }
+}
+
 .gear-cards {
   max-width: 1200px;
   margin: 42px auto 0;
@@ -726,7 +823,9 @@ svg { display: block; }
 
 .work:nth-of-type(even) .work-media img { transform: rotateY(10deg) rotateX(5deg); }
 
-.work-media img:hover {
+/* 悬停放大：改由容器驱动（照片上盖了防保存遮罩，img 不再直接接收 hover） */
+.work-media:hover img,
+.work:nth-of-type(even) .work-media:hover img {
   transform: rotateY(0) rotateX(0) scale(1.04);
   border-top-color: rgba(255,255,255,.5);
   box-shadow: 0 28px 56px rgba(0,0,0,.7), 0 0 24px rgba(255,255,255,.06);
@@ -959,4 +1058,40 @@ svg { display: block; }
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* ---------------- 图片防保存 ---------------- */
+/* 右键另存 / 拖拽 / 移动端长按菜单都会被拦下；
+   截图、录屏与开发者工具无法在前端阻止，这里只提高保存成本。 */
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  /* 命中测试穿透到容器，右键/长按拿不到 <img> 节点 */
+  pointer-events: none;
+}
+
+/* 命中容器时给出禁止光标，暗示不可直接取图 */
+.work-media,
+.gear-photo {
+  position: relative;
+  cursor: default;
+}
+
+/* 兜底：万一 img 的 pointer-events 被覆盖，透明层仍挡住取图 */
+.work-media::after,
+.gear-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }

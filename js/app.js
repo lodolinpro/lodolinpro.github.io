@@ -274,6 +274,57 @@
     update();
   }
 
+  /* ---------------- 图片防保存 ---------------- */
+
+  function initImageGuard() {
+    var lastWarn = 0;
+
+    function warn() {
+      var now = Date.now();
+      if (now - lastWarn < 4000) return;   /* 4 秒内不重复弹提示 */
+      lastWarn = now;
+      toast('照片受保护，不支持保存');
+    }
+
+    /* 照片本体或它的容器 */
+    function isPhoto(el) {
+      while (el && el.nodeType === 1) {
+        if (el.tagName === 'IMG') return true;
+        if (el.classList && (el.classList.contains('work-media') || el.classList.contains('gear-photo'))) return true;
+        if (el.classList && el.classList.contains('view')) return false;
+        el = el.parentNode;
+      }
+      return false;
+    }
+
+    /* 右键 / 长按「存储图像」 */
+    document.addEventListener('contextmenu', function (e) {
+      if (!isPhoto(e.target)) return;
+      e.preventDefault();
+      warn();
+    });
+
+    /* 拖拽到桌面 / 文件夹 */
+    document.addEventListener('dragstart', function (e) {
+      if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+    });
+
+    /* Ctrl/Cmd + S 保存网页 */
+    document.addEventListener('keydown', function (e) {
+      var k = e.key ? String(e.key).toLowerCase() : '';
+      if ((e.ctrlKey || e.metaKey) && k === 's') {
+        e.preventDefault();
+        warn();
+      }
+    });
+
+    /* 图片不参与拖拽（配合 CSS 的 -webkit-user-drag） */
+    Array.prototype.forEach.call(document.querySelectorAll('img'), function (img) {
+      img.setAttribute('draggable', 'false');
+      img.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    });
+  }
+
   /* ---------------- 启动 ---------------- */
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -283,5 +334,6 @@
     initFilter();
     initSpotMenus();
     initToTop();
+    initImageGuard();
   });
 })();
